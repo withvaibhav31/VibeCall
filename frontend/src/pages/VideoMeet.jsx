@@ -64,11 +64,17 @@ export default function VideoMeetComponent() {
 
     // }
 
-    useEffect(() => {
-        console.log("HELLO")
-        getPermissions();
+   useEffect(() => {
+    console.log("HELLO")
+    getPermissions();
 
-    })
+}, [])
+
+useEffect(() => {
+    if (askForUsername === false && localVideoref.current && window.localStream) {
+        localVideoref.current.srcObject = window.localStream;
+    }
+}, [askForUsername])
 
     let getDislayMedia = () => {
         if (screen) {
@@ -122,14 +128,14 @@ export default function VideoMeetComponent() {
     };
 
     useEffect(() => {
-        if (video !== undefined && audio !== undefined) {
-            getUserMedia();
-            console.log("SET STATE HAS ", video, audio);
+    if (video !== undefined && audio !== undefined) {
+        getUserMedia();
+        console.log("SET STATE HAS ", video, audio);
 
-        }
+    }
 
 
-    }, [video, audio])
+     }, [])
     let getMedia = () => {
         setVideo(videoAvailable);
         setAudio(audioAvailable);
@@ -383,13 +389,21 @@ export default function VideoMeetComponent() {
     }
 
     let handleVideo = () => {
-        setVideo(!video);
-        // getUserMedia();
+    setVideo(!video);
+    if (window.localStream) {
+        window.localStream.getVideoTracks().forEach(track => {
+            track.enabled = !track.enabled;
+        });
     }
+}
     let handleAudio = () => {
-        setAudio(!audio)
-        // getUserMedia();
+    setAudio(!audio)
+    if (window.localStream) {
+        window.localStream.getAudioTracks().forEach(track => {
+            track.enabled = !track.enabled;
+        });
     }
+}
 
     useEffect(() => {
         if (screen !== undefined) {
