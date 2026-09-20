@@ -311,7 +311,7 @@ useEffect(() => {
 
             socketRef.current.on('user-joined', (id, clients) => {
                 clients.forEach((socketListId) => {
-
+                  if (connections[socketListId]) return;
                     connections[socketListId] = new RTCPeerConnection(peerConfigConnections)
                     // Wait for their ice candidate       
                     connections[socketListId].onicecandidate = function (event) {
