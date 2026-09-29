@@ -1,6 +1,6 @@
 # 📞 VibeCall – Real-Time Video Conferencing App
 
-VibeCall is a browser-based Zoom-like video conferencing application built using **WebRTC**, **Socket.io**, and **Node.js**. It allows users to create or join virtual meeting rooms and communicate via video and audio in real time with low latency.
+VibeCall is a browser-based video conferencing application built using **WebRTC**, **Socket.io**, and **Node.js**. It allows users to create or join virtual meeting rooms and communicate via video and audio in real time with low latency.
 
 ---
 
